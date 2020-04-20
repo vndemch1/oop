@@ -22,8 +22,7 @@ public class navigationTest extends BaseTest {
         System.out.println("Курсы - Тест");
         driver.get("https://geekbrains.ru/career");
 //        Курсы
-        WebElement CoursesButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/courses\"]"));
-        CoursesButton.click();
+        navigation.getCoursesButton().click();
 
         driver.findElement(By.cssSelector("div button svg[class=\"svg-icon icon-popup-close-button \"]")).click();
         WebElement CoursesPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
@@ -37,8 +36,7 @@ public class navigationTest extends BaseTest {
         System.out.println("Вебинары - тест");
         driver.get("https://geekbrains.ru/career");
 //        Вебинары
-        WebElement EventsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/events\"]"));
-        EventsButton.click();
+        navigation.getEventsButton().click();
         //sleep(5000);
         WebElement EventsPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
         Assertions.assertEquals("Вебинары", EventsPageTitle.getText());
@@ -52,8 +50,8 @@ public class navigationTest extends BaseTest {
         System.out.println("Форум - тест");
         driver.get("https://geekbrains.ru/career");
 //        Форум
-        WebElement TopicsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/topics\"]"));
-        TopicsButton.click();
+//        WebElement TopicsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/topics\"]"));
+        navigation.getTopicsButton().click();
         //sleep(5000);
         WebElement TopicsPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
         Assertions.assertEquals("Форум", TopicsPageTitle.getText());
@@ -67,8 +65,8 @@ public class navigationTest extends BaseTest {
         System.out.println("Блог - тест");
         driver.get("https://geekbrains.ru/career");
 //        Блог
-        WebElement PostsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/posts\"]"));
-        PostsButton.click();
+//        WebElement PostsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/posts\"]"));
+        navigation.getPostsButton().click();
         //sleep(5000);
         WebElement PostsPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
         Assertions.assertEquals("Блог", PostsPageTitle.getText());
@@ -82,8 +80,8 @@ public class navigationTest extends BaseTest {
         System.out.println("Тесты - тест");
         driver.get("https://geekbrains.ru/career");
 //        Тесты
-        WebElement TestsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/tests\"]"));
-        TestsButton.click();
+//        WebElement TestsButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/tests\"]"));
+        navigation.getTestsButton().click();
         //sleep(5000);
         WebElement TestsPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
         Assertions.assertEquals("Тесты", TestsPageTitle.getText());
@@ -97,8 +95,8 @@ public class navigationTest extends BaseTest {
         System.out.println("Карьера - тест");
         driver.get("https://geekbrains.ru/events");
 //        Карьера
-        WebElement CareerButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/career\"]"));
-        CareerButton.click();
+//        WebElement CareerButton = driver.findElement(By.cssSelector("[class*=\"main-page-hidden\"] [href=\"/career\"]"));
+        navigation.getCareerButton().click();
         //sleep(5000);
         WebElement CareerPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
         Assertions.assertEquals("Карьера", CareerPageTitle.getText());

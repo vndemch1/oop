@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class Navigation {
-
+    
    @FindBy(css = "[class*=\"main-page-hidden\"] [href=\"/courses\"]")
    private WebElement CoursesButton;
    @FindBy(css = "[class*=\"main-page-hidden\"] [href=\"/events\"]")

@@ -14,39 +14,18 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class navigationTest extends BaseTest {
 
-    void HeaderCheck () {
-        WebElement header = driver.findElement(By.cssSelector("header[id=\"top-menu\"]"));
-        Assertions.assertTrue(header.isDisplayed());
-    }
-
-    void FooterCheck () {
-        WebElement footer = driver.findElement(By.cssSelector("footer[class=\"site-footer\"]"));
-        Assertions.assertTrue(footer.isDisplayed());
-    }
-
-    @ParameterizedTest(name="{index}==>Тест навигации: {1}")
-    @MethodSource("stringAndStringProvider")
-    void testWithMultiArgMethodSource(String str, String str2) {
-//        System.out.println("Тест " + str2);
+    @ParameterizedTest(name="{index}==>Тест навигации: {0}")
+    @MethodSource("stringProvider")
+    void testWithArgMethodSource(String str) {
         driver.get("https://geekbrains.ru/career");
-//        Вебинары
-        WebElement EventsButton = driver.findElement(By.cssSelector(str));
-        EventsButton.click();
+        navigation.ButtonClick(str);
 
-        WebElement EventsPageTitle = driver.findElement(By.cssSelector("[class=\"gb-header__title\"]"));
-        assertEquals(str2, EventsPageTitle.getText());
+        assertEquals(str, navigation.getNavPageTitle().getText());
         HeaderCheck();
         FooterCheck();
     }
 
-    static Stream<Arguments> stringAndStringProvider() {
-        return Stream.of(
-                arguments("[class*=\"main-page-hidden\"] [href=\"/events\"]", "Вебинары"),
-                arguments("[class*=\"main-page-hidden\"] [href=\"/topics\"]", "Форум"),
-                arguments("[class*=\"main-page-hidden\"] [href=\"/posts\"]", "Блог"),
-                arguments("[class*=\"main-page-hidden\"] [href=\"/tests\"]", "Тесты"),
-                arguments("[class*=\"main-page-hidden\"] [href=\"/career\"]", "Карьера"),
-                arguments("[class*=\"main-page-hidden\"] [href=\"/courses\"]", "Курсы")
-        );
+    static Stream<String> stringProvider() {
+        return Stream.of("Вебинары", "Форум",  "Блог",  "Тесты", "Карьера","Курсы");
     }
 }

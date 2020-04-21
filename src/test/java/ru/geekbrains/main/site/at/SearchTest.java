@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -24,37 +25,32 @@ public class SearchTest extends BaseTest {
         inputSearch.sendKeys("java");
         //    Проверить что отобразились блоки:
         //sleep(5000);
-        //        Профессии
-        WebElement ProfessionsBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][1]/div[@class='stickyTitleWrap']/header/h2"));
-        //        Курсы
-        WebElement CoursesBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][2]/div[@class='stickyTitleWrap']/header/h2"));
-        //        Вебинары
-        WebElement EventsBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][3]/div[@class='stickyTitleWrap']/header/h2"));
-        //        Блоги
-        WebElement PostsBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][4]/div[@class='stickyTitleWrap']/header/h2"));
-        //        Форум
-        WebElement TopicsBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][5]/div[@class='stickyTitleWrap']/header/h2"));
-        //        Тесты
-        WebElement TestsBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][6]/div[@class='stickyTitleWrap']/header/h2"));
-        //        Проекты и компании
-        WebElement ProjectsAndCompaniesBlock = driver.findElement(By.xpath("//div[@class='search-page-block'][7]/div[@class='stickyTitleWrap']/header/h2"));
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(d->ProfessionsBlock.isDisplayed());
-        wait.until(d->CoursesBlock.isDisplayed());
-        wait.until(d->EventsBlock.isDisplayed());
-        wait.until(d->PostsBlock.isDisplayed());
-        wait.until(d->TopicsBlock.isDisplayed());
-        wait.until(d->TestsBlock.isDisplayed());
-        wait.until(d->ProjectsAndCompaniesBlock.isDisplayed());
+        SearchClass searchClass = PageFactory.initElements(driver, SearchClass.class);
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+//        wait.until(d->ProfessionsBlock.isDisplayed());
+//        wait.until(d->CoursesBlock.isDisplayed());
+//        wait.until(d->EventsBlock.isDisplayed());
+//        wait.until(d->PostsBlock.isDisplayed());
+//        wait.until(d->TopicsBlock.isDisplayed());
+//        wait.until(d->TestsBlock.isDisplayed());
+//        wait.until(d->ProjectsAndCompaniesBlock.isDisplayed());
 
-        Assertions.assertEquals("Профессии",ProfessionsBlock.getText());
-        Assertions.assertEquals("Курсы",CoursesBlock.getText());
-        Assertions.assertEquals("Вебинары",EventsBlock.getText());
-        Assertions.assertEquals("Блоги",PostsBlock.getText());
-        Assertions.assertEquals("Форум",TopicsBlock.getText());
-        Assertions.assertEquals("Тесты",TestsBlock.getText());
-        Assertions.assertEquals("Проекты и компании",ProjectsAndCompaniesBlock.getText());
+        wait.until(d->searchClass.getProfessionsBlock().isDisplayed());
+        wait.until(d->searchClass.getCoursesBlock().isDisplayed());
+        wait.until(d->searchClass.getEventsBlock().isDisplayed());
+        wait.until(d->searchClass.getPostsBlock().isDisplayed());
+        wait.until(d->searchClass.getTopicsBlock().isDisplayed());
+        wait.until(d->searchClass.getTestsBlock().isDisplayed());
+        wait.until(d->searchClass.getProjectsAndCompaniesBlock().isDisplayed());
+
+        Assertions.assertEquals("Профессии",searchClass.getProfessionsBlock().getText());
+        Assertions.assertEquals("Курсы",searchClass.getCoursesBlock().getText());
+        Assertions.assertEquals("Вебинары",searchClass.getEventsBlock().getText());
+        Assertions.assertEquals("Блоги",searchClass.getPostsBlock().getText());
+        Assertions.assertEquals("Форум",searchClass.getTopicsBlock().getText());
+        Assertions.assertEquals("Тесты",searchClass.getTestsBlock().getText());
+        Assertions.assertEquals("Проекты и компании",searchClass.getProjectsAndCompaniesBlock().getText());
 
         //        Профессий не менее чем 2
         //        Курсов более 15
@@ -67,21 +63,27 @@ public class SearchTest extends BaseTest {
         WebElement ProfessionsCount = driver.findElement(By.xpath("//*[@id=\"professions\"]/div[1]/header/ul/li/a/span"));
         //int professionsNum = Integer.parseInt(ProfessionsCount.getText());
         Assertions.assertTrue(Integer.parseInt(ProfessionsCount.getText())>1);
+        System.out.println("Профессии");
         //        Курсы
         WebElement CoursesCount = driver.findElement(By.xpath("//header[@class='search-page-block__header']/ul/li/a[@data-tab='courses']/span"));
         Assertions.assertTrue(Integer.parseInt(CoursesCount.getText())>15);
+        System.out.println("Курсы");
         //        Вебинары
         WebElement EventsCount = driver.findElement(By.xpath("//header[@class='search-page-block__header']/ul/li/a[@data-tab='webinars']/span"));
         Assertions.assertTrue((Integer.parseInt(EventsCount.getText())>180)&&(Integer.parseInt(EventsCount.getText())<300));
+        System.out.println("Вебинары");
         //        Блоги
         WebElement PostsCount = driver.findElement(By.xpath("//header[@class='search-page-block__header']/ul/li/a[@data-tab='blogs']/span"));
         Assertions.assertTrue(Integer.parseInt(PostsCount.getText())>300);
+        System.out.println("Блоги");
         //        Форум
         WebElement TopicsCount = driver.findElement(By.xpath("//header[@class='search-page-block__header']/ul/li/a[@data-tab='forums']/span"));
         Assertions.assertNotEquals(Integer.parseInt(TopicsCount.getText()),350);
+        System.out.println("Форум");
         //        Тесты
         WebElement TestsCount = driver.findElement(By.xpath("//header[@class='search-page-block__header']/ul/li/a[@data-tab='blogs']/span"));
         Assertions.assertNotEquals(Integer.parseInt(TestsCount.getText()),0);
+        System.out.println("Тесты");
         //        Проекты и компании
         WebElement ProjectsAndCompaniesCount = driver.findElement(By.xpath("//header[@class='search-page-block__header']/ul/li/a[@data-tab='blogs']/span"));
         // //div/div/section/div[2]/h3/a
@@ -91,6 +93,7 @@ public class SearchTest extends BaseTest {
             if (ElementinList == -1) ElementinList = ListElement.getText().indexOf("GeekBrains");
         }
         Assertions.assertTrue(ElementinList != -1);
+        System.out.println("Проекты и компании");
 
 
 

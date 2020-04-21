@@ -22,11 +22,13 @@ public class BaseTest {
     void HeaderCheck () {
         WebElement header = driver.findElement(By.cssSelector("header[id=\"top-menu\"]"));
         Assertions.assertTrue(header.isDisplayed());
+        System.out.println("Header ok");
     }
 
     void FooterCheck () {
         WebElement footer = driver.findElement(By.cssSelector("footer[class=\"site-footer\"]"));
         Assertions.assertTrue(footer.isDisplayed());
+        System.out.println("Footer ok");
     }
 
     @BeforeEach
@@ -42,8 +44,8 @@ public class BaseTest {
         // fullscreen() не отрабатывает и после максимизации возвращается к исходному размеру
         driver.manage().window().setSize(new Dimension(1200, 1000));
         driver.get("https://geekbrains.ru/career");
-        navigation = PageFactory.initElements(driver, Navigation.class);
-        page = PageFactory.initElements(driver,Page.class);
+        //navigation = PageFactory.initElements(driver, Navigation.class);
+        //page = PageFactory.initElements(driver,Page.class);
     }
 
     @AfterEach

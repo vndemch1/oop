@@ -1,13 +1,21 @@
 package ru.geekbrains.main.site.at;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 
 public class Page {
+
+    private Navigation navigation;
+
+    public Page(WebDriver driver){
+        this.navigation = PageFactory.initElements(driver,Navigation.class);
+    }
 
     @FindBy(css = "[class=\"gb-header__title\"]")
     private WebElement pageTitle;
@@ -19,12 +27,18 @@ public class Page {
         return pageTitle;
     }
 
-    public WebElement getPagePopUpClosed() {
-        return pagePopUpClosed;
+    public Page PopUpClosed() {
+        pagePopUpClosed.click();
+        return this;
     }
 
-    public void checkTitle(String expextedTitle) {
+    public Page checkTitle(String expextedTitle) {
         String actualTitle = pageTitle.getText();
-        assertThat();
+        assertThat(expextedTitle, equalToCompressingWhiteSpace(actualTitle));
+        return this;
+    }
+
+    public Navigation getNavigation() {
+        return navigation;
     }
 }
